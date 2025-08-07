@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MysticPuzzleView.swift
 //  DDMysticPuzzle
 //
 //  Created by joe on 8/7/25.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct MysticPuzzleView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -20,5 +20,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MysticPuzzleView()
 }
