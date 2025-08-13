@@ -24,6 +24,30 @@ class MysticPuzzleViewModel: ObservableObject {
         
         tiles.append(TileModel(value: 3, currentPoint: .zero, winningPoint: .zero))
         
+        tiles.append(TileModel(value: 4, currentPoint: RIGHT * 1, winningPoint: RIGHT * 1))
+        
+        tiles.append(TileModel(value: 5, currentPoint: LEFT * 2 + DOWN, winningPoint: LEFT * 2 + DOWN))
+        
+        tiles.append(TileModel(value: 6, currentPoint: LEFT * 1 + DOWN, winningPoint: LEFT * 1 + DOWN))
+        
+        tiles.append(TileModel(value: 7, currentPoint: .zero + DOWN, winningPoint: .zero + DOWN))
+        
+        tiles.append(TileModel(value: 8, currentPoint: RIGHT * 1 + DOWN, winningPoint: RIGHT * 1 + DOWN))
+        
+        tiles.append(TileModel(value: 9, currentPoint: LEFT * 2 + DOWN * 2, winningPoint: LEFT * 2 + DOWN * 2))
+        
+        tiles.append(TileModel(value: 10, currentPoint: LEFT * 1 + DOWN * 2, winningPoint: LEFT * 1 + DOWN * 2))
+        
+        tiles.append(TileModel(value: 11, currentPoint: .zero + DOWN * 2, winningPoint: .zero + DOWN * 2))
+        
+        tiles.append(TileModel(value: 12, currentPoint: RIGHT * 1 + DOWN * 2, winningPoint: RIGHT * 1 + DOWN * 2))
+        
+        tiles.append(TileModel(value: 13, currentPoint: LEFT * 2 + DOWN * 3, winningPoint: LEFT * 2 + DOWN * 3))
+        
+        tiles.append(TileModel(value: 14, currentPoint: LEFT * 1 + DOWN * 3, winningPoint: LEFT * 1 + DOWN * 3))
+        
+        tiles.append(TileModel(value: 15, currentPoint: .zero + DOWN * 3, winningPoint: .zero + DOWN * 3))
+        
         let n = 4
         self.mysticPuzzleModel = MysticPuzzleModel(tiles: tiles, n: n)
     }

@@ -15,8 +15,8 @@ struct MysticPuzzleView: View {
     
     var body: some View {
         ZStack {
-            Color(.blue)
-                .opacity(0.3).ignoresSafeArea()
+            Color(.purple)
+                .opacity(0.5).ignoresSafeArea()
             
             VStack {
                 Text(title)
@@ -31,6 +31,13 @@ struct MysticPuzzleView: View {
                         TileView(tileNumber: tile.value, tileDimensions: tileDimensions, offset: tile.currentPoint)
                     }
                 }
+                .frame(maxWidth: tileDimensions * 4, maxHeight: tileDimensions * 4)
+                .padding()
+                .background(Color.blue.opacity(0.5))
+                .shadow(color: Color.blue.opacity(0.5), radius: 10, x: 3, y: 3)
+                .clipShape(.rect(cornerRadius: 20))
+                .padding()
+                .padding(.vertical)
             }
         }
     }
@@ -55,10 +62,11 @@ struct TileView: View {
             .renderingMode(.template)
             .foregroundStyle(.red)
             .aspectRatio(contentMode: .fit)
-            .frame(width: tileDimensions, height: tileDimensions)
+            .frame(width: tileDimensions * 0.8, height: tileDimensions * 0.8)
             .padding()
             .background(
-                Color.gray
+                Image("MarbleTileBackground")
+                    .resizable()
                     .frame(width: tileDimensions - somePadding, height: tileDimensions - somePadding)
                     .clipShape(.rect(cornerRadius: 10))
             )
