@@ -49,7 +49,7 @@ struct TileView: View {
     let offset: CGPoint
     
     let somePadding: CGFloat = 3
-    let digitResizeFactor: CGFloat = 5 / 2
+    let digitResizeFactor: CGFloat = 0.8
     
     var body: some View {
         let direction = offset * tileDimensions
@@ -62,7 +62,8 @@ struct TileView: View {
             .renderingMode(.template)
             .foregroundStyle(.red)
             .aspectRatio(contentMode: .fit)
-            .frame(width: tileDimensions * 0.8, height: tileDimensions * 0.8)
+            .frame(width: tileDimensions * digitResizeFactor, height: tileDimensions * digitResizeFactor)
+            .scaleEffect(tileNumber < 10 || tileNumber == 11 ? 0.8 : 1)
             .padding()
             .background(
                 Image("MarbleTileBackground")
