@@ -11,11 +11,22 @@ class MysticPuzzleViewModel: ObservableObject {
     @Published var mysticPuzzleModel: MysticPuzzleModel = MysticPuzzleModel(tiles: [], n: 0)
     
     init() {
+//        self.findFonts()
         self.createInitialItems()
         self.shuffle()
     }
     
-    // TODO: 
+    /// Finds all available fonts
+    /// This is not used in the app but may be
+    /// useful in case we wish to change fonts
+    /// in the future.
+    func findFonts() {
+        for family in UIFont.familyNames.sorted() {
+            let names = UIFont.fontNames(forFamilyName: family)
+            print("Family: \(family) Font names: \(names)")
+        }
+    }
+    
     func createInitialItems() {
         var tiles: [TileModel] = []
         tiles.append(TileModel(value: 1, currentPoint: LEFT * 2, winningPoint: LEFT * 2))

@@ -20,9 +20,9 @@ struct MysticPuzzleView: View {
             
             VStack {
                 Text(title)
-                    .font(.largeTitle)
+                    .font(Font.custom("ChalkboardSE-Bold", size: 44))
                     .fontWeight(.bold)
-                    .padding()
+                    .foregroundStyle(.white)
                 
                 ZStack {
                     let tiles = mysticPuzzleViewModel.mysticPuzzleModel.tiles
