@@ -25,10 +25,19 @@ struct MysticPuzzleView: View {
                     .foregroundStyle(.white)
                 
                 ZStack {
-                    let tiles = mysticPuzzleViewModel.mysticPuzzleModel.tiles
+                    let last = mysticPuzzleViewModel.mysticPuzzleModel.tiles.count - 1
                     
-                    ForEach(tiles) { tile in
+                    ForEach(0 ..< last, id: \.self) { index in
+                        let tile = mysticPuzzleViewModel.mysticPuzzleModel.tiles[index]
                         TileView(tileNumber: tile.value, tileDimensions: tileDimensions, offset: tile.currentPoint)
+                            .onTapGesture {
+                                withAnimation(.easeInOut(duration: 0.2)) {
+                                    if mysticPuzzleViewModel.move(index: index) {
+                                        // TODO: add sound effect here
+                                        print("Make a sound")
+                                    }
+                                }
+                            }
                     }
                 }
                 .frame(maxWidth: tileDimensions * 4, maxHeight: tileDimensions * 4)

@@ -57,7 +57,10 @@ class MysticPuzzleViewModel: ObservableObject {
         
         tiles.append(TileModel(value: 14, currentPoint: LEFT * 1 + DOWN * 3, winningPoint: LEFT * 1 + DOWN * 3))
         
-        tiles.append(TileModel(value: 15, currentPoint: .zero + DOWN * 3, winningPoint: .zero + DOWN * 3))
+        tiles.append(TileModel(value: 15, currentPoint: DOWN * 3, winningPoint: DOWN * 3))
+        
+        // add empty tile
+        tiles.append(TileModel(value: 16, currentPoint: DOWN * 3 + RIGHT, winningPoint: DOWN * 3 + RIGHT))
         
         let n = 4
         self.mysticPuzzleModel = MysticPuzzleModel(tiles: tiles, n: n)
@@ -65,4 +68,40 @@ class MysticPuzzleViewModel: ObservableObject {
     
     // TODO:
     func shuffle() {}
+    
+    /// The tile at 'index' is moved if and only if
+    /// an empty tile is adjacent to it.
+    /// Note that we update the model and
+    /// then, in turn, the view is updated.
+    /// - Parameter index: index of tile
+    /// - Returns: True if there is an empty
+    /// adjacent tile and false otherwise.
+    func move(index: Int) -> Bool {
+        var result = false
+        
+        let n = mysticPuzzleModel.n
+        let emptyPosition = mysticPuzzleModel.tiles[n * n - 1].currentPoint
+        
+        let tilePosition = mysticPuzzleModel.tiles[index].currentPoint
+        let distance = tilePosition.distanceTo(point: emptyPosition)
+        
+        // Are we exactly one tile away from the empty tile?
+        if distance == 1 {
+            // move tile at 'index' to empty position
+            // retain the 'value' and 'winningPoint'
+            mysticPuzzleModel.tiles[index] = TileModel(
+                value: mysticPuzzleModel.tiles[index].value,
+                currentPoint: emptyPosition,
+                winningPoint: mysticPuzzleModel.tiles[index].winningPoint
+            )
+            
+            // update empty tile position
+            mysticPuzzleModel.tiles[n * n - 1].currentPoint = tilePosition
+            
+            // return true since tile has been moved
+            result = true
+        }
+        
+        return result
+    }
 }
