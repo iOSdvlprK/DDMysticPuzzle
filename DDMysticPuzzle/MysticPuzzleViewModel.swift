@@ -66,8 +66,41 @@ class MysticPuzzleViewModel: ObservableObject {
         self.mysticPuzzleModel = MysticPuzzleModel(tiles: tiles, n: n)
     }
     
-    // TODO:
-    func shuffle() {}
+    /// Shuffle the tiles
+    func shuffle() {
+        /*
+         If n is even then we will do an even number of inversions. If n is odd then we will do an odd number of inversions.
+         
+         We will do n*n inversions which is even when n is even and odd when n is odd.
+         */
+        let n = mysticPuzzleModel.n
+        
+        for _ in 0 ..< n * n {
+            let (i, j) = getRandomIJ(max: n * n - 1)
+            /*
+              invert the i-th tile with the j-th tile
+             */
+            let lastPosition = mysticPuzzleModel.tiles[i].currentPoint
+            
+            mysticPuzzleModel.tiles[i].currentPoint = mysticPuzzleModel.tiles[j].currentPoint
+            
+            mysticPuzzleModel.tiles[j].currentPoint = lastPosition
+        }
+    }
+    
+    func getRandomIJ(max: Int) -> (Int, Int) {
+        if max == 1 {
+            return (1, 1)
+        }
+        let i = Int.random(in: 0 ..< max)
+        var j: Int
+        
+        // loop until get to different i and j values
+        repeat {
+            j = Int.random(in: 0 ..< max)
+        } while (i == j)
+        return (i, j)
+    }
     
     /// The tile at 'index' is moved if and only if
     /// an empty tile is adjacent to it.

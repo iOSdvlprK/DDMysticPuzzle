@@ -20,7 +20,7 @@ struct MysticPuzzleView: View {
             
             VStack {
                 Text(title)
-                    .font(Font.custom("ChalkboardSE-Bold", size: 44))
+                    .font(Font.custom("ChalkboardSE-Bold", size: 42))
                     .fontWeight(.bold)
                     .foregroundStyle(.white)
                 
@@ -51,6 +51,16 @@ struct MysticPuzzleView: View {
                 .padding()
                 .padding(.vertical)
                 .shadow(color: .black, radius: 10, x: 3, y: 3)
+                
+                Button(action: {
+                    mysticPuzzleViewModel.createInitialItems()
+                    mysticPuzzleViewModel.shuffle()
+                }, label: {
+                    Text("Shuffle")
+                        .font(Font.custom("ChalkboardSE-Bold", size: 42))
+                        .fontWeight(.bold)
+                        .foregroundStyle(.yellow)
+                })
             }
         }
     }
