@@ -11,6 +11,9 @@ struct MysticPuzzleView: View {
     @StateObject var mysticPuzzleViewModel: MysticPuzzleViewModel = .init()
     
     let title = "Mystic Puzzle"
+    let newGamePrompt = "New Game"
+    let shufflePrompt = "Shuffle"
+    let easyGamePrompt = "Easy Game"
     let tileDimensions: CGFloat = 70
     
     var body: some View {
@@ -19,10 +22,7 @@ struct MysticPuzzleView: View {
                 .opacity(0.9).ignoresSafeArea()
             
             VStack {
-                Text(title)
-                    .font(Font.custom("ChalkboardSE-Bold", size: 42))
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
+                ChalkboardTextView(text: title, size: 42, color: .white)
                 
                 ZStack {
                     let last = mysticPuzzleViewModel.mysticPuzzleModel.tiles.count - 1
@@ -52,17 +52,48 @@ struct MysticPuzzleView: View {
                 .padding(.vertical)
                 .shadow(color: .black, radius: 10, x: 3, y: 3)
                 
-                Button(action: {
-                    mysticPuzzleViewModel.createInitialItems()
-                    mysticPuzzleViewModel.shuffle()
-                }, label: {
-                    Text("Shuffle")
-                        .font(Font.custom("ChalkboardSE-Bold", size: 42))
-                        .fontWeight(.bold)
-                        .foregroundStyle(.yellow)
-                })
+                HStack {
+                    Button(action: {
+                        mysticPuzzleViewModel.createInitialItems()
+                        mysticPuzzleViewModel.shuffle()
+                    }, label: {
+                        ChalkboardTextView(text: mysticPuzzleViewModel.done() ? newGamePrompt : shufflePrompt, size: 24, color: .yellow)
+                            .padding()
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(.yellow, lineWidth: 3)
+                            }
+                            .padding(.vertical)
+                    })
+                    
+                    Button(action: {
+                        mysticPuzzleViewModel.createInitialItems()
+                        mysticPuzzleViewModel.shuffle()
+                    }, label: {
+                        ChalkboardTextView(text: easyGamePrompt, size: 24, color: .green)
+                            .padding()
+                            .overlay {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .stroke(.green, lineWidth: 3)
+                            }
+                            .padding(.vertical)
+                    })
+                }
             }
         }
+    }
+}
+
+struct ChalkboardTextView: View {
+    let text: String
+    let size: CGFloat
+    let color: Color
+    
+    var body: some View {
+        Text(text)
+            .font(Font.custom("ChalkboardSE-Bold", size: size))
+            .fontWeight(.bold)
+            .foregroundStyle(color)
     }
 }
 

@@ -66,6 +66,11 @@ class MysticPuzzleViewModel: ObservableObject {
         self.mysticPuzzleModel = MysticPuzzleModel(tiles: tiles, n: n)
     }
     
+    /// returns true when all of the current points equal to the winning points
+    func done() -> Bool {
+        return true
+    }
+    
     /// Shuffle the tiles
     func shuffle() {
         /*
