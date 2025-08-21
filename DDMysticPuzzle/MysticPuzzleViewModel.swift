@@ -68,6 +68,11 @@ class MysticPuzzleViewModel: ObservableObject {
     
     /// returns true when all of the current points equal to the winning points
     func done() -> Bool {
+        for tile in mysticPuzzleModel.tiles {
+            if tile.currentPoint != tile.winningPoint {
+                return false
+            }
+        }
         return true
     }
     

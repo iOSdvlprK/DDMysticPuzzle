@@ -68,7 +68,6 @@ struct MysticPuzzleView: View {
                     
                     Button(action: {
                         mysticPuzzleViewModel.createInitialItems()
-                        mysticPuzzleViewModel.shuffle()
                     }, label: {
                         ChalkboardTextView(text: easyGamePrompt, size: 24, color: .green)
                             .padding()
