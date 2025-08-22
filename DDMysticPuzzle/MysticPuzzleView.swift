@@ -33,8 +33,7 @@ struct MysticPuzzleView: View {
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.2)) {
                                     if mysticPuzzleViewModel.move(index: index) {
-                                        // TODO: add sound effect here
-                                        print("Make a sound")
+                                        playSound(sound: "TapSound", type: "wav")
                                     }
                                 }
                             }

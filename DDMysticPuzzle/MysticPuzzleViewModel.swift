@@ -6,6 +6,21 @@
 //
 
 import SwiftUI
+import AVFoundation
+
+var audioPlayer: AVAudioPlayer? = .init()
+
+func playSound(sound: String, type: String) {
+    if let path = Bundle.main.path(forResource: sound, ofType: type) {
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            
+            audioPlayer?.play()
+        } catch {
+            print("Something has gone wrong.")
+        }
+    }
+}
 
 class MysticPuzzleViewModel: ObservableObject {
     @Published var mysticPuzzleModel: MysticPuzzleModel = MysticPuzzleModel(tiles: [], n: 0)
