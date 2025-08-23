@@ -17,18 +17,36 @@ func playSound(sound: String, type: String) {
             
             audioPlayer?.play()
         } catch {
-            print("Something has gone wrong.")
+            print("ERROR: Something has gone wrong.")
         }
     }
 }
 
 class MysticPuzzleViewModel: ObservableObject {
-    @Published var mysticPuzzleModel: MysticPuzzleModel = MysticPuzzleModel(tiles: [], n: 0)
+    @Published var mysticPuzzleModel: MysticPuzzleModel = MysticPuzzleModel(tiles: [], n: 0) {
+        didSet {
+            saveItems()
+        }
+    }
+    
+    let itemKey = "Tile list"
     
     init() {
 //        self.findFonts()
-        self.createInitialItems()
-        self.shuffle()
+        guard let data = UserDefaults.standard.data(forKey: itemKey),
+              let savedItems = try? JSONDecoder().decode(MysticPuzzleModel.self, from: data) else {
+            self.createInitialItems()
+            self.shuffle()
+            return
+        }
+        
+        self.mysticPuzzleModel = savedItems
+    }
+    
+    func saveItems() {
+        if let encodeData = try? JSONEncoder().encode(mysticPuzzleModel) {
+            UserDefaults.standard.set(encodeData, forKey: itemKey)
+        }
     }
     
     /// Finds all available fonts

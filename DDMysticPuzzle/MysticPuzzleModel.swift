@@ -20,7 +20,7 @@ import SwiftUI
 ///
 /// In such a situation all of the tiles are at their
 /// winning points and the game is over.
-struct TileModel: Identifiable {
+struct TileModel: Identifiable, Codable {
     let id: UUID
     let value: Int
     var currentPoint: CGPoint
@@ -43,7 +43,7 @@ struct TileModel: Identifiable {
 /// We will focuses on the 15 tile game (we called it
 /// the mystic puzzle). However we will be able to
 /// generalize the game for any n.
-struct MysticPuzzleModel: Identifiable {
+struct MysticPuzzleModel: Identifiable, Codable {
     let id: UUID
     var tiles: [TileModel]
     let n: Int
